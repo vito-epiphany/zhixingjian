@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#123638">
+<meta name="description" content="知行间 · 投资风险管理：风险认知、风险定价、五大管理手段，以及仓位测算、投资组合可视化与风险检查清单。">
+<title>投资风险管理 · 知行间</title>
+<style>
+:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;color:#203936;background:#f5f7f4;--ink:#203936;--muted:#61746e;--line:#dce5df;--paper:#fff;--jade:#17695e;--pale:#e9f2ed}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}a{color:var(--jade)}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #80c6b3;outline-offset:3px}
+.container{max-width:1120px;margin:auto;padding:0 24px}.topbar{background:#fff;border-bottom:1px solid var(--line)}.topbar .container{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:65px}.brand{font-weight:780;font-size:17px;text-decoration:none;color:var(--ink)}.navlinks{display:flex;gap:18px;flex-wrap:wrap;font-size:13px}.navlinks a{color:#506761;text-decoration:none}.navlinks a:hover{text-decoration:underline}
+.hero{background:radial-gradient(ellipse at 90% 6%,#237f70 0%,transparent 39%),linear-gradient(130deg,#143f40,#0d2936);color:#f5faf6;padding:75px 0 70px}.hero .eyebrow{color:#9cd4c2}.eyebrow{font-weight:750;font-size:12px;letter-spacing:.17em;text-transform:uppercase;color:var(--jade)}.hero h1{font-size:clamp(39px,6.2vw,66px);letter-spacing:-.05em;line-height:1.15;margin:18px 0 19px}.hero p{max-width:740px;font-size:clamp(15px,1.6vw,18px);line-height:1.95;color:#d2e3de}.hero strong{color:#fff}.pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}.pills a{display:inline-block;text-decoration:none;background:#ffffff13;border:1px solid #7bad9d;color:#e4f5ef;padding:10px 15px;border-radius:100px;font-size:13px}.pills a:hover{background:#ffffff28}.hero .fine{color:#a8c7c1;font-size:12px;margin-top:28px}
+main{padding-top:53px;padding-bottom:80px}.section{margin-bottom:73px;scroll-margin-top:24px}.sectionhead{margin-bottom:23px}.sectionhead h2{font-size:clamp(27px,3.7vw,36px);letter-spacing:-.035em;margin:9px 0}.sectionhead p{margin:0;max-width:790px;line-height:1.9;color:var(--muted)}.grid{display:grid;gap:16px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 8px 30px #173e3408}.card h3{font-size:19px;margin:15px 0 8px}.card p{color:var(--muted);line-height:1.82;margin:0}.icon{display:grid;place-items:center;width:39px;height:39px;border-radius:11px;background:var(--pale);color:var(--jade);font-weight:800;font-size:18px}.card .num{font-size:12px;letter-spacing:.14em;color:#23786d;font-weight:800}.small{font-size:13px!important;line-height:1.8!important;color:var(--muted)}.statement{font-size:22px;line-height:1.55;font-weight:730;margin:8px 0 10px}.methods{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.method{padding:20px 16px}.method h3{font-size:16px;line-height:1.45}.method p{font-size:13px}.accent{background:linear-gradient(145deg,#e5f3ed,#fff)}.line{height:1px;background:var(--line);margin:18px 0}
+.toolbox{border:1px solid #dae6e0;background:#fff;border-radius:22px;padding:27px;box-shadow:0 10px 32px #173e3408}.toolgrid{display:grid;grid-template-columns:1.1fr .9fr;gap:27px}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.field{display:block}.field span{display:block;font-size:13px;font-weight:650;margin-bottom:7px}.field input{display:block;width:100%;border:1px solid #cddbd3;border-radius:10px;padding:12px;background:#fbfdfa;color:var(--ink)}.field small{display:block;margin-top:6px;color:var(--muted);font-size:11px}.result{background:#ecf4f0;border-radius:16px;padding:22px}.result .label{font-size:13px;color:#4c7369}.result .value{font-weight:800;letter-spacing:-.045em;font-size:clamp(27px,3.2vw,38px);margin:7px 0 12px;color:#145e53}.metric{display:flex;justify-content:space-between;gap:15px;border-top:1px solid #d1e2d9;padding:12px 0;color:#45685f;font-size:13px}.metric strong{color:#163f38}.notice{background:#faf6ea;color:#775f38;border-radius:11px;padding:12px 14px;line-height:1.75;font-size:12px;margin-top:15px}.error{color:#9a3c32!important}
+.portlayout{display:grid;grid-template-columns:.95fr 1.05fr;gap:26px;align-items:center}.donutwrap{text-align:center}.donut{width:min(100%,230px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#127a6d 0% 25%,#65a7a2 25% 50%,#d19b4a 50% 80%,#9aa6a2 80% 100%);margin:12px auto;position:relative}.hole{width:62%;height:62%;background:#fff;border-radius:50%;display:flex;flex-direction:column;justify-content:center}.hole strong{font-size:33px}.hole span{font-size:12px;color:var(--muted)}.allocation{display:grid;grid-template-columns:auto 1fr 100px;gap:9px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}.swatch{height:11px;width:11px;border-radius:4px}.allocation label{font-weight:640}.allocation input{width:100%;border:1px solid #cddbd3;border-radius:9px;padding:9px 8px;text-align:right;background:#fbfdfa}.legend{font-size:12px;color:var(--muted)}.portstatus{font-size:13px;margin:13px 0;color:#496b62;line-height:1.7}
+.checkhead{display:flex;justify-content:space-between;align-items:center;gap:20px}.progressbox{background:#e6eee9;border-radius:100px;overflow:hidden;height:10px;margin:12px 0 23px}.progressbar{height:100%;width:0;background:#247f6c;transition:width .18s ease}.checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.checkitem{display:flex;align-items:flex-start;gap:11px;padding:15px 16px;border:1px solid #dce5df;border-radius:13px;background:#fff;cursor:pointer;line-height:1.7;font-size:14px}.checkitem input{margin:3px 0 0;accent-color:#17695e;flex:none;width:17px;height:17px}.checkitem:has(input:checked){border-color:#a6cbbd;background:#f1f8f3}.plainbutton{border:1px solid #c9d8d0;background:#fff;color:#3b6155;border-radius:10px;padding:8px 12px;font-size:13px}.case{border-top:4px solid #28876e}.case.innovation{border-color:#d39a4d}.case .type{font-size:12px;font-weight:720;letter-spacing:.1em;color:#237360}.case.innovation .type{color:#a47432}.case ul{padding-left:19px;color:var(--muted);line-height:1.9;font-size:14px}.foot{background:#eaf0eb;border-top:1px solid #d6e2d9;padding:28px 0;color:#5d7569;font-size:13px;line-height:1.85}
+@media(max-width:980px){.methods{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:720px){.container{padding:0 18px}.topbar .container{align-items:flex-start;flex-direction:column;justify-content:center;padding:14px 18px}.navlinks{gap:12px}.hero{padding:55px 0}.two,.three,.methods,.toolgrid,.portlayout,.checklist{grid-template-columns:1fr}.methods{gap:12px}.fields{grid-template-columns:1fr 1fr}.toolbox{padding:18px}.card{padding:20px}}@media(max-width:370px){.fields{grid-template-columns:1fr}.allocation{grid-template-columns:auto 1fr 80px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.progressbar{transition:none}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="container"><a class="brand" href="./index.html">知行间 <span aria-hidden="true">↗</span></a><nav class="navlinks" aria-label="专题导航"><a href="#framework">认知框架</a><a href="#methods">管理手段</a><a href="#tools">实用工具</a><a href="#cases">案例对比</a><a href="#checklist">风险清单</a></nav></div></div>
+<header class="hero"><div class="container">
+<div class="eyebrow">ZHIXINGJIAN / INVESTMENT RISK LAB</div>
+<h1>读懂风险，<br>做好投资风险管理。</h1>
+<p>从<strong>风险认知</strong>出发，以<strong>风险定价</strong>理解投资决策。我们的目标不是消除所有不确定性，而是在能力范围内识别、衡量和管理风险。</p>
+<div class="pills"><a href="#framework">从底层逻辑开始 ↓</a><a href="#tools">体验风险工具 ↓</a><a href="#checklist">投资前检查 ↓</a></div>
+<p class="fine">知识框架与交互式情景工具 · 不提供实时行情或个股投资建议</p>
+</div></header>
+<main class="container">
+<section class="section" id="framework"><div class="sectionhead"><div class="eyebrow">01 / UNDERSTAND RISK</div><h2>先认识风险从哪里来</h2><p>投资风险不仅是价格波动。企业经营的不确定性、信息不对称，以及人的认知和行为偏差，都会使真实结果偏离预期。</p></div>
+<div class="grid three">
+<article class="card"><div class="icon" aria-hidden="true">01</div><h3>生意不确定性</h3><p>行业需求、竞争格局、经营能力和现金流，决定企业未来表现可能有多大偏差。</p></article>
+<article class="card"><div class="icon" aria-hidden="true">02</div><h3>信息差</h3><p>我们掌握的信息总是不完整的。深入研究能缩小误差，却无法把未知彻底清零。</p></article>
+<article class="card"><div class="icon" aria-hidden="true">03</div><h3>人性偏差</h3><p>过度自信、损失厌恶、从众和锚定效应，都可能让投资决策偏离事先制定的原则。</p></article>
+</div>
+<div class="grid two" style="margin-top:17px">
+<article class="card accent"><div class="num">底层逻辑</div><div class="statement">金融的重要功能之一，是为风险定价。</div><p>风险并非越低越好。应比较所承担的不确定性与可能获得的回报，判断补偿是否充分。</p></article>
+<article class="card"><div class="num">行动目标</div><div class="statement">管理风险，而非完全规避风险。</div><p>风险与收益不能机械对应：高风险并不保证高回报。控制不可承受的损失，才能保留长期参与的能力。</p></article>
+</div></section>
+<section class="section" id="methods"><div class="sectionhead"><div class="eyebrow">02 / FIVE METHODS</div><h2>五大风险管理手段</h2><p>从分析企业，到决定买入价格、投入多少资金，再到用组合和筛选机制保护自己。</p></div>
+<div class="grid methods">
+<article class="card method"><div class="num">01 / RESEARCH</div><h3>深度研究业务</h3><p>理解商业模式和现金流，缩小信息差。</p></article>
+<article class="card method"><div class="num">02 / VALUATION</div><h3>低估值策略</h3><p>重视估值与安全边际，防范买得过贵。</p></article>
+<article class="card method"><div class="num">03 / POSITION</div><h3>仓位管理</h3><p>限制单一标的风险敞口，防止一次失误伤及整体。</p></article>
+<article class="card method"><div class="num">04 / PORTFOLIO</div><h3>投资组合</h3><p>分散个体风险，降低对单一判断的依赖。</p></article>
+<article class="card method"><div class="num">05 / SCREENING</div><h3>选股筛选</h3><p>只关注自己理解、也能够承担其风险的标的。</p></article>
+</div></section>
+<section class="section" id="tools"><div class="sectionhead"><div class="eyebrow">03 / PRACTICAL TOOLS</div><h2>把风险原则变成可计算的边界</h2><p>以下均为<strong>可修改的假设情景</strong>，不是你的实际投资组合。输入只用于当前浏览器页面的即时计算，不会发送到服务器，也不会发布到 GitHub。</p></div>
+<div class="toolbox"><h3 style="margin:0 0 7px">仓位风险计算器</h3><p class="small" style="margin:0 0 23px">同时考虑「单一标的持仓上限」与「压力情景下可承受的账户损失」，取两者较严格的结果。</p>
+<div class="toolgrid"><div>
+<div class="fields">
+<label class="field"><span>投资资金总额（元）</span><input id="capital" type="number" min="1" step="1000" value="100000" inputmode="decimal"><small>假设示例值，可自行修改</small></label>
+<label class="field"><span>单一标的仓位上限（%）</span><input id="capWeight" type="number" min="0.1" max="100" step="0.5" value="15" inputmode="decimal"><small>作为组合纪律，而非推荐比例</small></label>
+<label class="field"><span>压力情景跌幅（%）</span><input id="downside" type="number" min="0.1" max="100" step="1" value="30" inputmode="decimal"><small>人为设定的跌幅，并非预测</small></label>
+<label class="field"><span>账户可承受的该项损失（%）</span><input id="lossLimit" type="number" min="0.01" max="100" step="0.5" value="2" inputmode="decimal"><small>以总投资资金为分母</small></label>
+</div>
+<div class="notice">计算方式：仓位上限 = min（资金 × 仓位限制，资金 × 账户损失容忍比例 ÷ 假设跌幅）。此处是静态压力测试，不是止损保证；跳空、杠杆与关联风险可能造成更大损失。</div>
+</div>
+<div class="result" aria-live="polite" aria-atomic="true"><div class="label">情景下的最大测算投入</div><div class="value" id="maxPosition">—</div><div class="metric"><span>占总资金比例</span><strong id="maxPercent">—</strong></div><div class="metric"><span>仓位上限约束</span><strong id="weightCapAmount">—</strong></div><div class="metric"><span>压力损失约束</span><strong id="lossCapAmount">—</strong></div><div class="metric"><span>按该仓位承受的情景损失</span><strong id="scenarioLoss">—</strong></div><p class="small" id="positionMessage" style="margin:15px 0 0">填写参数后自动计算。</p></div>
+</div></div>
+<div class="toolbox" style="margin-top:19px"><h3 style="margin:0 0 7px">组合配置可视化</h3><p class="small" style="margin:0 0 18px">拖动思路变成数字：修改示例资产占比，即时观察集中度与未配置仓位。不代表你的真实持仓。</p>
+<div class="portlayout">
+<div class="donutwrap"><div class="donut" id="donut" role="img" aria-label="示例投资组合配置环形图"><div class="hole"><strong id="allocatedTotal">100%</strong><span>配置合计</span></div></div><p class="legend">颜色对应右侧四类示例资产；不足 100% 时用灰色表示未配置。</p></div>
+<div><div class="allocation"><span class="swatch" style="background:#127a6d"></span><label for="asset1">个股 A</label><input id="asset1" class="allocation-input" type="number" min="0" max="100" step="1" value="25" aria-label="个股 A 配置比例，百分比"></div>
+<div class="allocation"><span class="swatch" style="background:#65a7a2"></span><label for="asset2">个股 B</label><input id="asset2" class="allocation-input" type="number" min="0" max="100" step="1" value="25" aria-label="个股 B 配置比例，百分比"></div>
+<div class="allocation"><span class="swatch" style="background:#d19b4a"></span><label for="asset3">宽基 ETF</label><input id="asset3" class="allocation-input" type="number" min="0" max="100" step="1" value="30" aria-label="宽基 ETF 配置比例，百分比"></div>
+<div class="allocation"><span class="swatch" style="background:#9aa6a2"></span><label for="asset4">现金及其他</label><input id="asset4" class="allocation-input" type="number" min="0" max="100" step="1" value="20" aria-label="现金及其他 配置比例，百分比"></div>
+<p id="portStatus" class="portstatus" role="status">配置合计 100%。</p><p class="small">注意：ETF 与个股可能持有相同公司；看似分散的资产也可能在压力情景下同涨同跌。配比图不等于相关性或风险测量。</p></div>
+</div></div></section>
+<section class="section" id="cases"><div class="sectionhead"><div class="eyebrow">04 / CASE STUDIES</div><h2>不同类型企业，关注不同的风险</h2><p>延续原始课程中的对照：成熟稳定型企业和前沿探索型企业，研究的重点不会完全相同。</p></div>
+<div class="grid two">
+<article class="card case"><span class="type">成熟稳定型 / 教学示例</span><h3>长江电力</h3><p>在相对成熟的业务假设下，更值得追问的风险往往是估值、政策、分红持续性和资本支出，而不只是企业能否存活。</p><ul><li>盈利和现金流有多稳定？</li><li>当前价格包含了怎样的增长预期？</li><li>水文条件、监管和债务会带来什么变化？</li></ul></article>
+<article class="card case innovation"><span class="type">前沿探索型 / 教学示例</span><h3>宇树科技</h3><p>在新技术商业化仍有不确定性的行业，技术迭代、竞争、产品规模化和未来利润兑现是主要的研究问题。</p><ul><li>需求和订单能否持续商业化？</li><li>技术优势是否能转化为长期利润？</li><li>估值是否已经透支了未来预期？</li></ul></article>
+</div><p class="small" style="margin-top:12px">这里只说明“如何提出研究问题”，并未进行对两家企业的最新经营数据、估值、上市状态或风险评级核验；不是投资推荐。</p></section>
+<section class="section" id="checklist"><div class="sectionhead"><div class="eyebrow">05 / DECISION CHECKLIST</div><h2>投资之前，先完成一次风险自查</h2><p>这些勾选只是你的检查进度，不意味着某只股票通过了审查。做完之后，仍需要数据与证据支持判断。</p></div>
+<div class="checkhead"><strong id="checkProgress" aria-live="polite">已检查 0 / 8 项</strong><button class="plainbutton" type="button" id="clearChecks">清空勾选</button></div>
+<div class="progressbox" role="progressbar" aria-label="投资风险自查完成度" id="checkBarWrapper" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0"><div class="progressbar" id="checkBar"></div></div>
+<div class="checklist">
+<label class="checkitem"><input type="checkbox" class="check"><span>我能用自己的话解释企业如何赚钱，而不是只知道一个热点概念。</span></label>
+<label class="checkitem"><input type="checkbox" class="check"><span>我调查了现金流、债务和未来资金需求，而非只看利润数字。</span></label>
+<label class="checkitem"><input type="checkbox" class="check"><span>我知道当前估值隐含了哪些增长假设，考虑了买贵的风险。</span></label>
+<label class="checkitem"><input type="checkbox" class="check"><span>我能列出至少两种推翻自己判断的可能情形。</span></label>
+<label class="checkitem"><input type="checkbox" class="check"><span>我考虑了单一标的与整个组合的集中度及相关性。</span></label>
+<label class="checkitem"><input type="checkbox" class="check"><span>我做过压力情景测算，能承担潜在亏损而不影响必要开支。</span></label>
+<label class="checkitem"><input type="checkbox" class="check"><span>我明确了需要重新评估或退出的基本面条件，而不只盯价格。</span></label>
+<label class="checkitem"><input type="checkbox" class="check"><span>我区分了已核实的事实、自己的假设，以及尚未查证的信息。</span></label>
+</div><p class="small" style="margin-top:16px" id="checkStatus">选择任意项目，查看你的检查进度。</p></section>
+</main>
+<footer class="foot"><div class="container"><strong>知行间 · 理解 → 表达 → 执行</strong><p>本页是投资学习与风险推演工具，不构成投资建议。示例数字不是个人资产记录，结果不保证收益或限制实际损失。输入和勾选不会自动保存，也不会上传。</p><a href="./index.html">← 返回思想档案馆首页</a>　·　<a href="./connections.html">触类旁通</a>　·　<a href="./market-judgments.html">市场判断日志</a></div></footer>
+<script>
+(function(){
+'use strict';
+var nfmt=new Intl.NumberFormat('zh-CN',{maximumFractionDigits:0});
+function money(n){return '¥ '+nfmt.format(n);}
+function val(id){return Number(document.getElementById(id).value);}
+function out(id,value){document.getElementById(id).textContent=value;}
+function calculate(){
+ var capital=val('capital'),cap=val('capWeight'),down=val('downside'),loss=val('lossLimit');
+ var ok=[capital,cap,down,loss].every(Number.isFinite)&&capital>0&&cap>0&&cap<=100&&down>0&&down<=100&&loss>0&&loss<=100;
+ if(!ok){['maxPosition','maxPercent','weightCapAmount','lossCapAmount','scenarioLoss'].forEach(function(id){out(id,'—');});out('positionMessage','请输入有效数值：资金大于 0，三个百分比都在 0 至 100 之间（不含 0）。');document.getElementById('positionMessage').classList.add('error');return;}
+ document.getElementById('positionMessage').classList.remove('error');
+ var byWeight=capital*cap/100,byLoss=capital*(loss/down),limit=Math.min(capital,byWeight,byLoss),impact=limit*down/100;
+ out('maxPosition',money(limit));out('maxPercent',(limit/capital*100).toFixed(2)+'%');
+ out('weightCapAmount',money(byWeight));out('lossCapAmount',money(byLoss));out('scenarioLoss',money(impact));
+ out('positionMessage',byLoss<byWeight?'当前由压力情景的账户损失限制约束仓位。':'当前由单一标的仓位上限约束仓位。');
+}
+['capital','capWeight','downside','lossLimit'].forEach(function(id){document.getElementById(id).addEventListener('input',calculate);});calculate();
+var ids=['asset1','asset2','asset3','asset4'],colors=['#127a6d','#65a7a2','#d19b4a','#9aa6a2'];
+function portfolio(){
+ var data=ids.map(val),valid=data.every(function(x){return Number.isFinite(x)&&x>=0&&x<=100;});
+ if(!valid){out('allocatedTotal','—');out('portStatus','每一项都必须填写 0 至 100 之间的百分比。');document.getElementById('portStatus').classList.add('error');return;}
+ document.getElementById('portStatus').classList.remove('error');
+ var sum=data.reduce(function(a,b){return a+b;},0),denominator=Math.max(100,sum),pos=0,stops=[];
+ data.forEach(function(d,i){var next=pos+d/denominator*100;stops.push(colors[i]+' '+pos+'% '+next+'%');pos=next;});
+ if(sum<100){stops.push('#e5ebe6 '+pos+'% 100%');}
+ if(sum===0){stops=['#e5ebe6 0% 100%'];}
+ document.getElementById('donut').style.background='conic-gradient('+stops.join(',')+')';
+ document.getElementById('donut').setAttribute('aria-label','示例配置合计 '+sum.toFixed(1)+'%；个股 A '+data[0]+'%，个股 B '+data[1]+'%，宽基 ETF '+data[2]+'%，现金及其他 '+data[3]+'%');
+ out('allocatedTotal',sum.toFixed(sum%1?1:0)+'%');
+ var message='配置合计 '+sum.toFixed(1)+'%。';
+ if(sum>100){message+=' 超过 100%，请降低比例；图表目前按相对占比归一化展示。';}
+ else if(sum<100){message+=' 尚有 '+(100-sum).toFixed(1)+'% 未分配。';}
+ else{message+=' 配比已填满。';}
+ if(data[0]>35||data[1]>35){message+=' 研究提示：有单一个股超过 35%，请审视集中风险（35% 仅作展示阈值）。';}
+ out('portStatus',message);
+}
+ids.forEach(function(id){document.getElementById(id).addEventListener('input',portfolio);});portfolio();
+var checks=[].slice.call(document.querySelectorAll('.check'));
+function updateChecks(){var done=checks.filter(function(x){return x.checked;}).length;out('checkProgress','已检查 '+done+' / '+checks.length+' 项');document.getElementById('checkBar').style.width=(100*done/checks.length)+'%';document.getElementById('checkBarWrapper').setAttribute('aria-valuenow',String(done));out('checkStatus',done===checks.length?'已完成全部检查项目；这仍不是风险已消除或投资已经合格的证明。':'还有 '+(checks.length-done)+' 项尚未检查。');}
+checks.forEach(function(c){c.addEventListener('change',updateChecks);});
+document.getElementById('clearChecks').addEventListener('click',function(){checks.forEach(function(c){c.checked=false;});updateChecks();});
+updateChecks();
+})();
+</script>
+</body></html>
